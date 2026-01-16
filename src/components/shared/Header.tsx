@@ -6,11 +6,10 @@ import Link from 'next/link';
 import { Button } from './Button';
 
 const navLinks = [
-  { href: '#program', label: 'Program' },
-  { href: '#universities', label: 'Universities' },
-  { href: '#pricing', label: 'Pricing' },
-  { href: '#team', label: 'Team' },
-  { href: '#faq', label: 'FAQ' },
+  { href: '#program', label: 'courses' },
+  { href: '#universities', label: 'universities' },
+  { href: '#pricing', label: 'pricing' },
+  { href: '#team', label: 'about' },
 ];
 
 export function Header() {
@@ -41,31 +40,26 @@ export function Header() {
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-lg'
+          ? 'bg-white/90 backdrop-blur-md shadow-sm'
           : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-[#F5B041] rounded-lg flex items-center justify-center">
-              <span className="text-[#1a1a2e] font-bold text-xl">P</span>
-            </div>
-            <span className={`text-2xl font-bold ${isScrolled ? 'text-[#1a1a2e]' : 'text-white'}`}>
+          <Link href="/" className="flex items-center gap-2">
+            <span className="text-2xl font-bold text-gray-900">
               PONTEA
             </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center gap-10">
             {navLinks.map((link) => (
               <button
                 key={link.href}
                 onClick={() => scrollToSection(link.href)}
-                className={`text-sm font-medium transition-colors hover:text-[#F5B041] ${
-                  isScrolled ? 'text-gray-700' : 'text-white/90'
-                }`}
+                className="text-gray-600 hover:text-[#01278b] transition-colors font-medium"
               >
                 {link.label}
               </button>
@@ -76,40 +70,32 @@ export function Header() {
           <div className="hidden md:block">
             <Button
               onClick={() => scrollToSection('#assessment')}
+              variant="outline"
               size="sm"
             >
-              Start Assessment
+              log in
             </Button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2"
+            className="md:hidden p-2 -mr-2"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className={`h-6 w-6 ${isScrolled ? 'text-[#1a1a2e]' : 'text-white'}`}
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              {isMobileMenuOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
+            <div className="w-6 h-5 flex flex-col justify-between">
+              <motion.span
+                animate={isMobileMenuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
+                className="block w-full h-0.5 bg-gray-900 origin-left"
+              />
+              <motion.span
+                animate={isMobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
+                className="block w-full h-0.5 bg-gray-900"
+              />
+              <motion.span
+                animate={isMobileMenuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
+                className="block w-full h-0.5 bg-gray-900 origin-left"
+              />
+            </div>
           </button>
         </div>
       </div>
@@ -121,25 +107,27 @@ export function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden bg-white border-t border-gray-100"
+            className="md:hidden bg-white border-t border-gray-100 overflow-hidden"
           >
-            <div className="px-4 py-4 space-y-3">
-              {navLinks.map((link) => (
-                <button
+            <div className="px-4 py-6 space-y-2">
+              {navLinks.map((link, index) => (
+                <motion.button
                   key={link.href}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.05 }}
                   onClick={() => scrollToSection(link.href)}
-                  className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg"
+                  className="block w-full text-left px-4 py-3 text-gray-600 hover:text-[#01278b] hover:bg-[#ebe4f7] rounded-xl transition-colors font-medium"
                 >
                   {link.label}
-                </button>
+                </motion.button>
               ))}
-              <div className="pt-2">
+              <div className="pt-4 px-4">
                 <Button
                   onClick={() => scrollToSection('#assessment')}
                   fullWidth
                 >
-                  Start Assessment
+                  Start Free Assessment
                 </Button>
               </div>
             </div>

@@ -1,5 +1,20 @@
 import type { Metadata } from "next";
+import { Nunito, Poppins } from "next/font/google";
 import "./globals.css";
+
+const nunito = Nunito({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-serif",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "PONTEA School | ARCHED & TIL-A Exam Preparation",
@@ -28,8 +43,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className="font-sans antialiased">
+    <html lang="en" className={`scroll-smooth ${nunito.variable} ${poppins.variable}`}>
+      <body className="font-sans antialiased bg-white">
         {children}
       </body>
     </html>

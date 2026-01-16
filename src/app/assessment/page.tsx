@@ -51,20 +51,20 @@ export default function AssessmentPage() {
   }, [phase, result, router]);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#f8f9fc]">
       {/* Header */}
-      <header className="bg-white shadow-sm">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header className="bg-white shadow-sm border-b border-gray-100">
+        <div className="max-w-4xl mx-auto px-6 sm:px-8">
           <div className="flex items-center justify-between h-16">
-            <Link href="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-[#F5B041] rounded-lg flex items-center justify-center">
-                <span className="text-[#1a1a2e] font-bold text-lg">P</span>
+            <Link href="/" className="flex items-center gap-2">
+              <div className="w-8 h-8 bg-[#01278b] rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-lg">P</span>
               </div>
-              <span className="text-xl font-bold text-[#1a1a2e]">PONTEA</span>
+              <span className="text-xl font-bold text-gray-900">PONTEA</span>
             </Link>
             <Link
               href="/"
-              className="text-gray-500 hover:text-[#1a1a2e] transition-colors text-sm"
+              className="text-gray-500 hover:text-[#01278b] transition-colors text-sm font-medium"
             >
               Exit Assessment
             </Link>
@@ -73,7 +73,7 @@ export default function AssessmentPage() {
       </header>
 
       {/* Main content */}
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <main className="max-w-2xl mx-auto px-6 sm:px-8 py-12">
         {phase === 'questions' && (
           <ProgressBar
             progress={progress}
