@@ -1,0 +1,20 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Questions collection
+    match /questions/{questionId} {
+      // Allow anyone to read questions (for the assessment)
+      allow read: if true;
+
+      // Only authenticated users can write (create, update, delete) questions
+      allow write: if request.auth != null;
+    }
+
+    // Default deny all other collections
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
